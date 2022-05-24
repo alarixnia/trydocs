@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>Chapter 2. Getting help</title>
+<meta name="author" content="The NetBSD Foundation">
+<title>Chapter 2. Installing NetBSD: Preliminary considerations and preparations</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,64 +436,250 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="article toc2 toc-left">
 <div id="header">
-<h1>Chapter 2. Getting help</h1>
+<h1>Chapter 2. Installing NetBSD: Preliminary considerations and preparations</h1>
+<div class="details">
+<span id="author" class="author">The NetBSD Foundation</span><br>
+<span id="email" class="email"><a href="mailto:author@asciidoctor.org">author@asciidoctor.org</a></span><br>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">May 13, 2022</span>
+<br><span id="revremark">AsciiDoc Guide article test</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_2_1_preliminary_considerations">2.1. Preliminary considerations</a>
+<ul class="sectlevel2">
+<li><a href="#_2_1_1_dual_booting">2.1.1. Dual booting</a></li>
+<li><a href="#_2_1_2_netbsd_on_emulation_and_virtualization">2.1.2. NetBSD on emulation and virtualization</a></li>
+</ul>
+</li>
+<li><a href="#_2_2_install_preparations">2.2. Install preparations</a>
+<ul class="sectlevel2">
+<li><a href="#_2_2_1_the_install_document">2.2.1. The INSTALL document</a></li>
+<li><a href="#_2_2_2_partitions">2.2.2. Partitions</a></li>
+<li><a href="#_2_2_3_hard_disk_space_requirements">2.2.3. Hard disk space requirements</a></li>
+<li><a href="#_2_2_4_network_settings">2.2.4. Network settings</a></li>
+<li><a href="#_2_2_5_backup_your_data_and_operating_systems">2.2.5. Backup your data and operating systems!</a></li>
+<li><a href="#_2_2_6_preparing_the_installation_media">2.2.6. Preparing the installation media</a>
+<ul class="sectlevel3">
+<li><a href="#_2_2_6_1_booting_the_install_system_from_usb">2.2.6.1. Booting the install system from USB</a></li>
+<li><a href="#_2_2_6_2_booting_the_install_system_from_cd">2.2.6.2. Booting the install system from CD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_2_3_checklist">2.3. Checklist</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="_2_1_preliminary_considerations">2.1. Preliminary considerations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_2_1_1_dual_booting">2.1.1. Dual booting</h3>
 <div class="paragraph">
-<p>To get help when using pkgsrc, the definitive source is this
-	document, the pkgsrc guide. If you don&#8217;t find anything here,
-	there are alternatives:</p>
+<p>It is possible to install NetBSD together with other operating systems on one hard disk.</p>
+</div>
+<div class="paragraph">
+<p>If there is already an operating system on the hard disk, think about how you can free some space for NetBSD; if NetBSD will share the disk with other operating systems you will probably need to create a new partition (which you will do with sysinst). Oftentimes this will not be possible unless you resize an existing partition.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, it is not possible to resize an existing partition with sysinst, but there are some commercial products (like Partition Magic) and some free tools (GNU Parted, FIPS, pfdisk) available for this.</p>
+</div>
+<div class="paragraph">
+<p>You can also install NetBSD on a separate hard disk.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Advice</strong></p>
+</div>
+<div class="paragraph">
+<p>Unless you are comfortable with setting up a partitioning scheme for two or more operating systems, and unless you understand the risk of data loss if you should make a mistake, it is recommended that you give NetBSD its own hard disk. This removes the risk of damage to the existing operating system.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_1_2_netbsd_on_emulation_and_virtualization">2.1.2. NetBSD on emulation and virtualization</h3>
+<div class="paragraph">
+<p>It is possible to install and run NetBSD on top of other operating systems without having to worry about partitioning. Emulators or virtualization environments provide a quick and secure way to try out NetBSD. The host operating system remains unchanged, and the risk of damaging important data is minimized.</p>
+</div>
+<div class="paragraph">
+<p>Information about NetBSD as a Xen host and guest system is available on the NetBSD/xen web page.</p>
+</div>
+<div class="paragraph">
+<p>The NetBSD on emulated hardware web page provides detailed information about various emulators and the supported NetBSD platforms. It should also be noted that NetBSD runs as a VMware guest.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_2_install_preparations">2.2. Install preparations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_2_2_1_the_install_document">2.2.1. The INSTALL document</h3>
+<div class="paragraph">
+<p>The first thing to do before installing NetBSD is to read the release information and installation notes in one of the INSTALL files: this is the official description of the installation procedure, with platform-specific information and important details. It is available in HTML, PostScript, plain text, and an enhanced text format to be used with more. These files can be found in the root directory of the NetBSD release (on the install CD or on the FTP server). For example, the amd64 install instructions are available at ftp.NetBSD.org/pub/NetBSD/NetBSD-9.2/amd64/INSTALL.html</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_2_partitions">2.2.2. Partitions</h3>
+<div class="paragraph">
+<p>The terminology used by NetBSD for partitioning is different from the typical DOS/Windows terminology; in fact, there are two partitioning schemes involved when running NetBSD on a typical PC. NetBSD installs in one of the four primary BIOS partitions (the partitions defined in the hard disk partition table).</p>
+</div>
+<div class="paragraph">
+<p>Within a BIOS partition (also called slice) NetBSD defines its BSD partitions using a disklabel. These partitions can be seen only by NetBSD and are identified by lowercase letters (starting with “a”). For example, wd0a refers to the “a” partition of the first IDE disk (wd0) and sd0a refers to the “a” partition of the first SCSI disk. In Figure 2.1, “Partitions” there are two primary BIOS partitions, one used by DOS and the other by NetBSD. NetBSD describes the disk layout through the disklabel.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="part.gif" alt="Partitions">
+</div>
+<div class="title">Figure 1. Image Partitions</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Note</strong></p>
+</div>
+<div class="paragraph">
+<p>The meaning of partitions “c” and “d” is typical of the amd64 port. On most other ports, “c” represents the whole disk.</p>
+</div>
+</div>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Note</strong></p>
+</div>
+<div class="paragraph">
+<p>If NetBSD shares the hard disk with another operating system (like in the previous example) you will want to install a boot manager, i.e., a program which lets you choose which OS to start at boot time. sysinst can do this for you and will ask if you want to install one. Unless you have specific reasons not to, you should let sysinst perform this step.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_3_hard_disk_space_requirements">2.2.3. Hard disk space requirements</h3>
+<div class="paragraph">
+<p>The exact amount of space required for a given NetBSD installation varies depending on the platform being used and which distribution sets are selected. Generally speaking, if you have a few GB of free space on your hard drive, you will have enough space for a full installation of the base system.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_4_network_settings">2.2.4. Network settings</h3>
+<div class="paragraph">
+<p>If you plan to fetch distribution sets over the network (not necessary if you downloaded a full-size install ISO) and do not use DHCP, write down your basic network settings. You will need:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The built-in pkgsrc help, which is available after bootstrapping
-pkgsrc. Run <strong>bmake help topic=…</strong> to get
-help for any topic, such as a variable name like
-<code>BUILD_DEFS</code>, a make target like
-<strong>do-build</strong>, a missing C or C++ function like
-<strong>strcasecmp</strong> or any other topic.</p>
+<p>Your IP address (example: 192.168.1.7)</p>
+</li>
+<li>
+<p>the netmask (example: 255.255.255.0)</p>
+</li>
+<li>
+<p>the IP address of your default gateway (example: 192.168.1.1)</p>
+</li>
+<li>
+<p>the IP address of the DNS server you use (example: 145.253.2.75)</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_5_backup_your_data_and_operating_systems">2.2.5. Backup your data and operating systems!</h3>
 <div class="paragraph">
-<p>The available help topics are listed in <a href="http://netbsd.org/docs/pkgsrc/help-topics.html">Appendix E, Help topics</a>.</p>
+<p>Before you begin the installation, make sure that you have a reliable backup of any operating systems and data on the used hard disk. Mistakes in partitioning your hard disk can lead to data loss. Existing operating systems may become unbootable. "Reliable backup" means that the backup and restore procedure is tested and works flawlessly!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_2_6_preparing_the_installation_media">2.2.6. Preparing the installation media</h3>
+<div class="paragraph">
+<p>The NetBSD installation system consists of two parts. The first part is the installation kernel. This kernel contains the NetBSD install program sysinst and it is booted from the install media (e.g, CD/DVD, USB drive, memory card, etc.). The sysinst program will prepare the disk: it separates the disk space into partitions, makes the disk bootable and creates the necessary file systems.</p>
+</div>
+<div class="paragraph">
+<p>The second part of the install system is made up of the binary distribution sets: the files of the NetBSD operating system. The installer needs to have access to the distribution sets. sysinst will usually fetch these files from the install media you booted from, but it can also fetch them via FTP, NFS, or a local filesystem.</p>
+</div>
+<div class="paragraph">
+<p>The NetBSD Project provides complete install media for every supported hardware architecture. This is usually in the form of bootable CD images (.iso files).</p>
+</div>
+<div class="sect3">
+<h4 id="_2_2_6_1_booting_the_install_system_from_usb">2.2.6.1. Booting the install system from USB</h4>
+<div class="paragraph">
+<p>To use a bootable USB install image (on amd64, i386), download the img.gz file for your hardware architecture, decompress and copy the image to a USB. For example on a Unix-like system you may use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># gunzip NetBSD-9.2-amd64-install.img.gz
+# dd if=NetBSD-9.2-amd64-install.img of=/dev/your-usb bs=2m</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples of your-usb are /dev/rsd0d (NetBSD), /dev/sda (Linux).</p>
+</div>
+<div class="paragraph">
+<p><strong>Caution</strong>
+Selecting the wrong device in dd may destroy your current system. Double-check it isn&#8217;t mounted and is your USB stick. It should appear at the bottom of   dmesg on connect, for example, if you see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sd0 at scsibus0 target 0 lun 0: [...], disk removable</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>on NetBSD, you will want to select /dev/rsd0d.</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_2_6_2_booting_the_install_system_from_cd">2.2.6.2. Booting the install system from CD</h4>
+<div class="paragraph">
+<p>To use a bootable NetBSD install CD, download the iso file for your hardware architecture and burn it to a CD or DVD. You will need to handle this step alone, as burning programs vary widely. Ensure that your computer is set up to boot from CD-ROM before hard drives, insert the disc, and reboot the computer.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_checklist">2.3. Checklist</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is the checklist about the things that should be clear and on-hand now:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>To see the value of a single variable, run <strong>bmake
-show-var VARNAME=<em><code>X</code></em></strong>.</p>
+<p>Available disk space</p>
 </li>
 <li>
-<p>To see the values of the most common variables, run
-<strong>bmake show-all</strong>. These variables are grouped by
-topic. To see the variables for a single topic, run
-<strong>bmake
-show-all-<em><code>topic</code></em></strong>, for example
-<strong>bmake show-all-fetch</strong>.</p>
+<p>Bootable medium with the install system</p>
 </li>
 <li>
-<p>The pkgsrc-users mailing list, to which
-<a href="https://www.NetBSD.org/mailinglists/#pkgsrc-users">you
-can subscribe</a> and then <a href="mailto:pkgsrc-users@NetBSD.org">ask your
-questions</a>.</p>
+<p>CD/DVD or server with the distribution sets</p>
 </li>
 <li>
-<p>The #pkgsrc IRC channel, which is accessible
-<a href="https://webchat.freenode.net/">via a web browser</a>
-or by using a specialized chat program such as
-<a href="http://xchat.org/">XChat</a>.
-Pick any user name and join the channel #pkgsrc.</p>
+<p>Your network information (only if you will be fetching distribution sets via the network and do not use DHCP)</p>
+</li>
+<li>
+<p>A working backup</p>
+</li>
+<li>
+<p>A copy of the INSTALL document</p>
 </li>
 </ul>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
+Version 1.0<br>
 Last updated 2022-05-24 07:49:34 UTC
 </div>
 </div>
